@@ -45,6 +45,5 @@ io.on('connection', function (socket) {
             socket.emit('img-finish');
 
         });
-
     });
 });

@@ -3,6 +3,22 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <style>
+            html,
+            body {
+                height: 100%;
+            }
+
+            img.one {
+                height: auto;
+                width: auto;
+            }
+
+            img.two {
+                max-width:100%;
+                max-height:100%;
+            }
+        </style>
     </head>
     <body>
         <img id="img-stream2" src="" />
@@ -13,13 +29,17 @@
         var imgChunks = [];
 
         socket.on('img-chunk', (chunk) => {
+            // var img = document.getElementById('img-stream2');
             imgChunks.push(chunk);
-            //img.setAttribute('src', 'data:image/jpeg;base64,' +imgChunks.join(""));
+            // img.setAttribute('src', 'data:image/jpeg;base64,' + window.btoa(imgChunks));
         });
 
         socket.on('img-finish', () => {
             var img = document.getElementById('img-stream2');
+            img.className = "two";
+
             img.setAttribute('src', 'data:image/jpeg;base64,' +imgChunks.join(""));
+            // img.setAttribute('src', 'data:image/jpeg;base64,' + window.btoa(imgChunks));
         })
 
         socket.on('img-reset', () => {
